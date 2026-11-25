@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>NOIR PERFUMES</title>
+
+<style>
+:root {
+  --bg: #08090b;
+  --panel: #14171c;
+  --silver: #cbd0d7;
+  --muted: #9299a3;
+  --gold: #c5a46d;
+  --line: #30343b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at top, #252a32, #08090b 65%);
+  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 5%;
+  background: #090a0cef;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 7px;
+}
+
+.logo small {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 5px;
+  margin-top: 5px;
+}
+
+header a {
+  color: var(--silver);
+  text-decoration: none;
+  border: 1px solid #666;
+  padding: 10px 14px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 20px 40px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 11px;
+}
+
+.hero h1 {
+  font-size: clamp(35px, 6vw, 65px);
+  letter-spacing: 7px;
+  margin: 18px 0;
+}
+
+.hero p {
+  color: #b5bbc3;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.price-tag {
+  display: inline-block;
+  border: 1px solid #777;
+  padding: 12px 20px;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.toolbar {
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px 5%;
+  display: flex;
+  gap: 12px;
+}
+
+.toolbar input,
+.toolbar select {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  background: #14171c;
+  border: 1px solid var(--line);
+  color: white;
+}
+
+main {
+  max-width: 1400px;
+  padding: 0 5% 70px;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.card {
+  background: linear-gradient(145deg, #191d23, #0d0f12);
+  border: 1px solid var(--line);
+  transition: .25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #9299a3;
+}
+
+.photo {
+  height: 230px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(ellipse, #363d47, #111419 70%);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 15px #000);
+}
+
+.no-image {
+  text-align: center;
+  color: #cbd0d7;
+  padding: 15px;
+}
+
+.no-image strong {
+  display: block;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.no-image small {
+  display: block;
+  color: #858c96;
+  margin-top: 10px;
+  letter-spacing: 3px;
+}
+
+.details { padding: 16px; }
+
+.category {
+  color: var(--gold);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.details h3 {
+  font-size: 15px;
+  min-height: 38px;
+  margin: 9px 0;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  min-height: 32px;
+}
+
+.price {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.price small {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: normal;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(110deg, #dce0e5, #929aa4);
+  color: #101216;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  padding: 13px;
+  width: 100%;
+  font-size: 10px;
+}
+
+button:hover { filter: brightness(1.12); }
+
+.cart-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+  padding: 16px 22px;
+  z-index: 20;
+  box-shadow: 0 5px 20px #0009;
+}
+
+.panel {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  padding: 25px;
+  background: #111419;
+  border: 1px solid var(--line);
+}
+
+.panel h2 {
+  letter-spacing: 3px;
+  font-size: 17px;
+}
+
+.cart-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.cart-line a {
+  color: var(--gold);
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.checkout label {
+  display: block;
+  color: #b8bec6;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.checkout input,
+.checkout select,
+.checkout textarea {
+  width: 100%;
+  padding: 13px;
+  margin-top: 7px;
+  background: #090b0e;
+  border: 1px solid #343941;
+  color: white;
+}
+
+.checkout textarea { min-height: 80px; }
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin: 22px 0;
+  font-size: 18px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  color: #777f89;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+@media(max-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media(max-width: 700px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .photo { height: 170px; }
+  .details { padding: 12px; }
+  .details h3 { font-size: 13px; }
+  .hero { padding: 45px 15px 30px; }
+  .logo { font-size: 23px; }
+}
+
+@media(max-width: 380px) {
+  .photo { height: 145px; }
+  .toolbar { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    NOIR
+    <small>PERFUMES · ESENCIA Y PRESENCIA</small>
+  </div>
+  <a href="#catalogo">CATÁLOGO</a>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">FRAGANCIAS MASCULINAS</div>
+  <h1>DEJÁ TU HUELLA.</h1>
+  <p>Encontrá tu esencia. Elegí tu próxima fragancia favorita.</p>
+  <div class="price-tag">35 ML · $3.500 CADA PERFUME</div>
+</section>
+
+<div class="toolbar" id="catalogo">
+  <input id="search" type="search" placeholder="Buscar perfume...">
+  <select id="category">
+    <option value="">Todas las categorías</option>
+    <option value="Árabes">Árabes</option>
+    <option value="Diseñador">Diseñador</option>
+    <option value="Frescos">Frescos</option>
+    <option value="Intensos">Intensos</option>
+  </select>
+</div>
+
+<main>
+  <div class="grid" id="products"></div>
+</main>
+
+<section class="panel" id="pedido">
+  <h2>MI PEDIDO</h2>
+
+  <div id="cartItems">
+    <p style="color:#999">Todavía no agregaste perfumes.</p>
+  </div>
+
+  <div class="total">
+    <span>TOTAL</span>
+    <span id="total">$0</span>
+  </div>
+
+  <div class="checkout">
+    <h2>DATOS DEL CLIENTE</h2>
+
+    <label>Nombre
+      <input id="customer" placeholder="Tu nombre">
+    </label>
+
+    <label>Forma de pago
+      <select id="payment">
+        <option>Transferencia</option>
+        <option>Efectivo</option>
+      </select>
+    </label>
+
+    <label>Notas adicionales (opcional)
+      <textarea id="notes" placeholder="Aclaraciones sobre tu pedido..."></textarea>
+    </label>
+
+    <button onclick="sendOrder()">
+      FINALIZAR PEDIDO POR WHATSAPP
+    </button>
+  </div>
+</section>
+
+<footer>
+  NOIR PERFUMES · 35 ML · $3.500 · CÓRDOBA, ARGENTINA
+</footer>
+
+<button class="cart-button" onclick="document.getElementById('pedido').scrollIntoView({behavior:'smooth'})">
+  MI PEDIDO · <span id="count">0</span>
+</button>
+
+<script>
+const WHATSAPP = "5493515648068";
+const PRICE = 3500;
+
+const products = [
+  {name:"Afnan 9PM",cat:"Árabes",desc:"Dulce, especiado y nocturno.",img:"https://us.afnan.com/cdn/shop/files/9PM-Product-01_ac1d61da-68bc-4cf8-8086-8cdc3accfbdf.jpg?v=1727379862&width=1000"},
+  {name:"Invictus",cat:"Diseñador",desc:"Fresco, marino y energético.",img:""},
+  {name:"Dior Sauvage",cat:"Diseñador",desc:"Aromático, especiado y elegante.",img:"https://www.parfumerie.nl/media/catalog/product/3/3/3348901368247_2.jpg"},
+  {name:"One Million",cat:"Diseñador",desc:"Cálido, especiado y seductor.",img:""},
+  {name:"Versace Eros",cat:"Diseñador",desc:"Menta fresca, vainilla y maderas.",img:""},
+  {name:"Lattafa Asad",cat:"Árabes",desc:"Ambarado, especiado y potente.",img:""},
+  {name:"Acqua di Giò",cat:"Frescos",desc:"Acuático, cítrico y limpio.",img:""},
+  {name:"Nautica Voyage",cat:"Frescos",desc:"Marino, verde y refrescante.",img:""},
+  {name:"212 Men",cat:"Diseñador",desc:"Fresco, urbano y amaderado.",img:""},
+  {name:"Bleu de Chanel",cat:"Diseñador",desc:"Amaderado aromático y sofisticado.",img:""},
+  {name:"Rasasi Hawas",cat:"Árabes",desc:"Frutal, acuático y envolvente.",img:""},
+  {name:"Club de Nuit Intense Man",cat:"Árabes",desc:"Cítrico, ahumado y amaderado.",img:""},
+  {name:"Lattafa Khamrah",cat:"Árabes",desc:"Dulce, cálido y especiado.",img:""},
+  {name:"Afnan Supremacy Not Only Intense",cat:"Árabes",desc:"Frutal, intenso y amaderado.",img:""},
+  {name:"Versace Dylan Blue",cat:"Diseñador",desc:"Aromático, fresco y profundo.",img:""},
+  {name:"Light Blue Pour Homme",cat:"Frescos",desc:"Cítrico, fresco y mediterráneo.",img:""},
+  {name:"Versace Pour Homme",cat:"Frescos",desc:"Cítrico, limpio y elegante.",img:""},
+  {name:"Y Eau de Parfum",cat:"Diseñador",desc:"Aromático, fresco y moderno.",img:""},
+  {name:"Le Male Elixir",cat:"Intensos",desc:"Ambarado, dulce y cálido.",img:""},
+  {name:"Ultra Male",cat:"Intensos",desc:"Frutal, dulce y especiado.",img:""},
+  {name:"Stronger With You Intensely",cat:"Intensos",desc:"Dulce, avainillado y especiado.",img:""},
+  {name:"Bad Boy",cat:"Diseñador",desc:"Especiado, ambarado y moderno.",img:""},
+  {name:"Invictus Victory Elixir",cat:"Intensos",desc:"Ambarado, dulce y poderoso.",img:""},
+  {name:"Le Beau",cat:"Diseñador",desc:"Coco, maderas y frescura tropical.",img:""}
+];
+
+let cart = JSON.parse(localStorage.getItem("noir-cart") || "{}");
+
+function renderProducts() {
+  const query = document.getElementById("search").value.toLowerCase();
+  const category = document.getElementById("category").value;
+
+  const filtered = products
+    .map((p,i)=>({...p,id:i}))
+    .filter(p =>
+      (!category || p.cat === category) &&
+      (p.name.toLowerCase().includes(query) ||
+       p.desc.toLowerCase().includes(query))
+    );
+
+  document.getElementById("products").innerHTML = filtered.map(p => `
+    <article class="card">
+      <div class="photo">
+        ${p.img
+          ? `<img src="${p.img}" alt="${p.name}" loading="lazy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+             <div class="no-image" style="display:none">
+               <strong>${p.name}</strong><small>NOIR PERFUMES</small>
+             </div>`
+          : `<div class="no-image">
+               <strong>${p.name}</strong><small>NOIR PERFUMES</small>
+             </div>`
+        }
+      </div>
+      <div class="details">
+        <div class="category">${p.cat}</div>
+        <h3>${p.name}</h3>
+        <div class="description">${p.desc}</div>
+        <div class="price">$3.500 <small>· 35 ML</small></div>
+        <button onclick="addToCart(${p.id})">AGREGAR AL PEDIDO</button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function addToCart(id) {
+  cart[id] = (cart[id] || 0) + 1;
+  saveCart();
+}
+
+function changeQuantity(id, amount) {
+  cart[id] = (cart[id] || 0) + amount;
+  if (cart[id] <= 0) delete cart[id];
+  saveCart();
+}
+
+function saveCart() {
+  localStorage.setItem("noir-cart", JSON.stringify(cart));
+  updateCart();
+}
+
+function updateCart() {
+  const ids = Object.keys(cart);
+  const quantity = ids.reduce((sum,id)=>sum+cart[id],0);
+  const total = quantity * PRICE;
+
+  document.getElementById("count").textContent = quantity;
+  document.getElementById("total").textContent = formatMoney(total);
+
+  document.getElementById("cartItems").innerHTML = ids.length
+    ? ids.map(id => `
+      <div class="cart-line">
+        <span>${products[id].name} × ${cart[id]}</span>
+        <span>
+          ${formatMoney(cart[id] * PRICE)}
+          <a href="#" onclick="changeQuantity(${id},-1);return false">−</a>
+          <a href="#" onclick="changeQuantity(${id},1);return false">+</a>
+        </span>
+      </div>
+    `).join("")
+    : '<p style="color:#999">Todavía no agregaste perfumes.</p>';
+}
+
+function formatMoney(value) {
+  return new Intl.NumberFormat("es-AR", {
+    style:"currency",
+    currency:"ARS",
+    maximumFractionDigits:0
+  }).format(value);
+}
+
+function sendOrder() {
+  const ids = Object.keys(cart);
+
+  if (!ids.length) {
+    alert("Agregá al menos un perfume.");
+    return;
+  }
+
+  const name = document.getElementById("customer").value.trim();
+
+  if (!name) {
+    alert("Por favor, completá tu nombre.");
+    return;
+  }
+
+  const quantity = ids.reduce((sum,id)=>sum+cart[id],0);
+  const total = quantity * PRICE;
+
+  const items = ids.map(id =>
+    `• ${products[id].name} x${cart[id]} — ${formatMoney(cart[id]*PRICE)}`
+  ).join("\n");
+
+  const message =
+`Hola, quiero hacer un pedido en NOIR PERFUMES:
+
+${items}
+
+Total: ${formatMoney(total)}
+Nombre: ${name}
+Pago: ${document.getElementById("payment").value}
+Notas: ${document.getElementById("notes").value || "Sin notas"}`;
+
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+document.getElementById("search").addEventListener("input",renderProducts);
+document.getElementById("category").addEventListener("change",renderProducts);
+
+renderProducts();
+updateCart();
+</script>
+
+</body>
+</html>
